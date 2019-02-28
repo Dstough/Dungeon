@@ -1,5 +1,6 @@
 enum ActionResult
 {
     success,
-    failure
+    failure,
+    retry
 }

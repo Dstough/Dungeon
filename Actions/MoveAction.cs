@@ -2,12 +2,14 @@ using System;
 class MoveAction : Action
 {
     Position targetLocation { get; set; }
-    Entity self { get; set; }
+    Actor self { get; set; }
 
-    public MoveAction(Entity _self, Position _targetLocation)
+    public MoveAction(Actor _self, Position _targetLocation)
     {
         targetLocation = _targetLocation;
         self = _self;
+        speed = _self.movementSpeed;
+        redrawScreen = true;
     }
     public override ActionResult perform()
     {

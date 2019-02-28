@@ -1,11 +1,9 @@
-class IdleAction : Action
+class QuitGameAction : Action
 {
-    public IdleAction()
-    {
-        speed = 1;
-    }
     public override ActionResult perform()
     {       
+        //TODO: save game here.
+        Program.quit = true;
         return ActionResult.success;
     }
 }
