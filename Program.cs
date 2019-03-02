@@ -37,8 +37,11 @@ class Program
                 Graphics.drawScreen();
             }
         }
-        catch (Exception)
+        catch (Exception ex)
         {
+            Console.Write(ex.Message);
+            Console.Write("\n Press any key to exit...");
+            Console.ReadKey();
             //TODO: Dump the dungeon var to a recoverable file.
         }
     }

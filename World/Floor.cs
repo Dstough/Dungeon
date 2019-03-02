@@ -4,7 +4,7 @@ class Floor
     public int level { get; set; }
     public int height { get; set; }
     public int width { get; set; }
-    public List<GameObject> objects { get; set; }
+    public List<Item> objects { get; set; }
     public List<Actor> actors { get; set; }
     public Floor(int _level) : this()
     {
@@ -14,7 +14,7 @@ class Floor
     {
         height = Config.windowHeight;
         width = Config.windowWidth;
-        objects = new List<GameObject>();
+        objects = new List<Item>();
         actors = new List<Actor>();
     }
 }

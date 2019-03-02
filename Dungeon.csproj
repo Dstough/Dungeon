@@ -2,6 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationIcon>app.ico</ApplicationIcon>
     <GenerateFullPaths>true</GenerateFullPaths>
   </PropertyGroup>
 </Project>

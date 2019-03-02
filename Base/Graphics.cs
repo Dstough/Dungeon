@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using System.Diagnostics;
 class Graphics
 {
     public static void drawScreen()
@@ -22,12 +24,25 @@ class Graphics
             {
                 var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
                 var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
-                var charToDraw = actor?.sprite.ToString().pastelBackGround(actor.backgroundColor).pastel(actor.forgroundColor) ?? item?.sprite.ToString().pastelBackGround(item.backgroundColor).pastel(item.forgroundColor) ?? " ";
+                var charToDraw = " ";
+                if (actor != null)
+                {
+                    charToDraw = actor.sprite.ToString();
+                    charToDraw = actor.forgroundColor != Color.Empty ? charToDraw.pastel(actor.forgroundColor) : charToDraw;
+                    charToDraw = actor.backgroundColor != Color.Empty ? charToDraw.pastelBackGround(actor.backgroundColor) : charToDraw;
+                }
+                else if (item != null)
+                {
+                    charToDraw = item.sprite.ToString();
+                    charToDraw = item.forgroundColor != Color.Empty ? charToDraw.pastel(actor.forgroundColor) : charToDraw;
+                    charToDraw = item.backgroundColor != Color.Empty ? charToDraw.pastelBackGround(actor.backgroundColor) : charToDraw;
+                }
                 buffer.Append(charToDraw);
             }
         }
         Console.SetCursorPosition(0, 0);
         Console.Write(buffer);
+        resizeWindowBuffer();
     }
 
     public static void drawHud()
@@ -45,10 +60,13 @@ class Graphics
 
     public static void resizeWindowBuffer()
     {
-        Console.WindowHeight = Config.windowHeight + 5;
-        Console.WindowWidth = Config.windowWidth;
         Console.BufferHeight = Config.windowHeight + 5;
         Console.BufferWidth = Config.windowWidth;
+
+        Console.WindowHeight = Config.windowHeight + 5;
+        Console.WindowWidth = Config.windowWidth;
+
         Console.CursorVisible = false;
+        Console.Title = "Dungeon";
     }
 }
