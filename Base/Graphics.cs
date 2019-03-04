@@ -44,6 +44,60 @@ class Graphics
         Console.Write(buffer);
         resizeWindowBuffer();
     }
+    public static void drawRegion(int startingX, int startingY, int endX, int endY)
+    {
+        if (endX <= startingX || endY <= startingY)
+            return;
+
+        if (startingX < 0)
+        {
+            endX -= startingX;
+            startingX = 0;
+        }
+
+        if (startingY < 0)
+        {
+            endY -= startingY;
+            startingY = 0;
+        }
+
+        if (endX > Config.windowWidth)
+        {
+            endX -= (endX - Config.windowWidth);
+        }
+
+        if (endY > Config.windowHeight)
+        {
+            endY -= (endY - Config.windowHeight);
+        }
+
+        var buffer = new StringBuilder();
+        for (int y = startingY; y < startingY + endY; y++)
+        {
+            buffer.Clear();
+            for (int x = startingX; x < startingX + endX; x++)
+            {
+                var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
+                var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
+                var charToDraw = " ";
+                if (actor != null)
+                {
+                    charToDraw = actor.sprite.ToString();
+                    charToDraw = actor.forgroundColor != Color.Empty ? charToDraw.pastel(actor.forgroundColor) : charToDraw;
+                    charToDraw = actor.backgroundColor != Color.Empty ? charToDraw.pastelBackGround(actor.backgroundColor) : charToDraw;
+                }
+                else if (item != null)
+                {
+                    charToDraw = item.sprite.ToString();
+                    charToDraw = item.forgroundColor != Color.Empty ? charToDraw.pastel(actor.forgroundColor) : charToDraw;
+                    charToDraw = item.backgroundColor != Color.Empty ? charToDraw.pastelBackGround(actor.backgroundColor) : charToDraw;
+                }
+                buffer.Append(charToDraw);
+            }
+            Console.SetCursorPosition(startingX, y);
+            Console.Write(buffer);
+        }
+    }
 
     public static void drawHud()
     {
