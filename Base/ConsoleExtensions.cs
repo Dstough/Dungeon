@@ -36,11 +36,12 @@ public static class ConsoleExtensions
         if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             var iStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-            var enable = GetConsoleMode(iStdOut, out var outConsoleMode) && SetConsoleMode(iStdOut, outConsoleMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN);
+            var enable = GetConsoleMode(iStdOut, out var outConsoleMode) && SetConsoleMode(iStdOut, outConsoleMode | ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN | ENABLE_WRAP_AT_EOL_OUTPUT);
         }
     }
 
     private const int STD_OUTPUT_HANDLE = -11;
+    private const uint ENABLE_WRAP_AT_EOL_OUTPUT = 0x0002;
     private const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004;
     private const uint DISABLE_NEWLINE_AUTO_RETURN = 0x0008;
 
@@ -95,5 +96,15 @@ public static class ConsoleExtensions
     {
         var color = Color.FromArgb(int.Parse(hexColor.Replace("#", ""), NumberStyles.HexNumber));
         return pastelBackGround(input, color);
+    }
+
+    public static string fillLine(this string input, char fill = ' ')
+    {
+        if (input.Length < Config.screenWidth)
+            for (var x = input.Length; x <= Config.screenWidth; x++)
+                input += fill;
+        if (input.Length > Config.screenWidth)
+            input = input.Substring(0, Config.screenWidth);
+        return input;
     }
 }

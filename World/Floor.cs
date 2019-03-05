@@ -12,8 +12,8 @@ class Floor
     }
     public Floor()
     {
-        height = Config.windowHeight;
-        width = Config.windowWidth;
+        height = Config.roomHeight;
+        width = Config.screenWidth;
         objects = new List<Item>();
         actors = new List<Actor>();
     }
