@@ -9,6 +9,8 @@ class Hero : Actor
     }
     public override Action takeTurn()
     {
+        while(Console.KeyAvailable)
+            Console.ReadKey(true);
         var input = Console.ReadKey(true);
         Action action = new RetryAction();
 

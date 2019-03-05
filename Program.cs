@@ -34,12 +34,7 @@ class Program
                         }
                     }
                 } 
-                Graphics.drawRegion(
-                    hero.position.x - hero.lightRadius, 
-                    hero.position.y - hero.lightRadius, 
-                    hero.position.x + hero.lightRadius, 
-                    hero.position.y + hero.lightRadius
-                );
+                Graphics.drawRoom();
             }
         }
         catch (Exception ex)
