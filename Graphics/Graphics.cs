@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Drawing;
 using System.Diagnostics;
-class Screen
+class Graphics
 {
     public static void drawScreen()
     {
@@ -31,21 +31,21 @@ class Screen
         {
             for (var x = 0; x < Config.screenWidth; x++)
             {
-                var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
-                var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
+                //var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
+                //var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
                 var charToDraw = " ";
-                if (actor != null)
-                {
-                    charToDraw = actor.sprite.ToString();
-                    charToDraw = actor.forgroundColor != Color.Empty ? charToDraw.pastel(actor.forgroundColor) : charToDraw;
-                    charToDraw = actor.backgroundColor != Color.Empty ? charToDraw.pastelBackGround(actor.backgroundColor) : charToDraw;
-                }
-                else if (item != null)
-                {
-                    charToDraw = item.sprite.ToString();
-                    charToDraw = item.forgroundColor != Color.Empty ? charToDraw.pastel(actor.forgroundColor) : charToDraw;
-                    charToDraw = item.backgroundColor != Color.Empty ? charToDraw.pastelBackGround(actor.backgroundColor) : charToDraw;
-                }
+                // if (actor != null)
+                // {
+                //     charToDraw = actor.sprite.ToString();
+                //     charToDraw = actor.forgroundColor != Color.Empty ? charToDraw.pastel(actor.forgroundColor) : charToDraw;
+                //     charToDraw = actor.backgroundColor != Color.Empty ? charToDraw.pastelBackGround(actor.backgroundColor) : charToDraw;
+                // }
+                // else if (item != null)
+                // {
+                //     charToDraw = item.sprite.ToString();
+                //     charToDraw = item.forgroundColor != Color.Empty ? charToDraw.pastel(actor.forgroundColor) : charToDraw;
+                //     charToDraw = item.backgroundColor != Color.Empty ? charToDraw.pastelBackGround(actor.backgroundColor) : charToDraw;
+                // }
                 buffer.Append(charToDraw);
             }
         }
