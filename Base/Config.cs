@@ -11,7 +11,6 @@ class Config
     public static bool defaultRedrawScreen { get; } = false;
     public static int defaultCreatureMovementSpeed { get; } = 5;
 
-
     #endregion
 
     #region user

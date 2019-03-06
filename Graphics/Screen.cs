@@ -8,17 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-    public partial class Screen : Form
+public partial class Screen : Form
+{
+    public Screen()
     {
-        public Screen()
-        {
-            InitializeComponent();
-        }
-
-        private void buttonExit_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        InitializeComponent();
     }
 
+    private void Load(object sender, EventArgs e)
+    {
+
+    }
+}

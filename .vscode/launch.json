@@ -12,7 +12,7 @@
             "program": "${workspaceFolder}/bin/Debug/netcoreapp3.0/Dungeon.dll",
             "args": [],
             "cwd": "${workspaceFolder}",
-            "console": "externalTerminal",
+            "console": "internalConsole",
             "stopAtEntry": false,
             "internalConsoleOptions": "openOnSessionStart"
         },
