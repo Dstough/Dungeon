@@ -15,7 +15,7 @@ public partial class Screen : Form
         InitializeComponent();
     }
 
-    private void Load(object sender, EventArgs e)
+    private void onLoad(object sender, EventArgs e)
     {
 
     }

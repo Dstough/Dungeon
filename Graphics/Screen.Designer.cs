@@ -17,7 +17,7 @@ partial class Screen
         this.Name = "Dungeon";
         this.Text = "Dungeon";
         this.ClientSize = new System.Drawing.Size(800, 600);
-        this.Load += new System.EventHandler(this.Load);
+        this.Load += new System.EventHandler(onLoad);
         this.ResumeLayout(false);
     }
 }
