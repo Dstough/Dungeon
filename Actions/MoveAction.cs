@@ -9,7 +9,6 @@ class MoveAction : Action
         targetLocation = _targetLocation;
         self = _self;
         speed = _self.movementSpeed;
-        redrawScreen = true;
     }
     public override ActionResult perform()
     {
