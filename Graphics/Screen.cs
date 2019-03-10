@@ -22,7 +22,7 @@ public partial class Screen : Form
     private void onLoad(object sender, EventArgs e)
     {
         OnResizeEnd(e);
-        brush = new SolidBrush(Color.White);
+        brush = new SolidBrush(Color.Gray);
         thread = new Thread(draw);
         thread.IsBackground = true;
         thread.Start();

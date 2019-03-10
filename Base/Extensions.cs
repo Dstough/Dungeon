@@ -1,4 +1,4 @@
-public static class ConsoleExtensions
+public static class Extensions
 {
     public static string trim(this string input, int start = 0, int length = Config.screenWidth)
     {
