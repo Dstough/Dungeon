@@ -4,7 +4,7 @@ class Hero : Actor
     public int lightRadius { get; set; }
     public Hero() : base()
     {
-        sprite = '╧';
+        sprite = ' ';
         lightRadius = 5;
     }
     public override Action takeTurn()

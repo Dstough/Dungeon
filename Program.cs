@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 
 static class Program
 {
+    static Thread graphicsThread = new Thread(buildScreen);
     public static bool quit = false;
     public static List<string> history = new List<string>();
     public static Dungeon dungeon = new Dungeon();
@@ -16,8 +17,10 @@ static class Program
     {
         try
         {
-            Application.Run(new Screen());
-            //dungeon.levels[dungeon.currentLevel].actors.Add(hero);
+            graphicsThread.IsBackground = true;
+            graphicsThread.Start();
+            
+            dungeon.levels[dungeon.currentLevel].actors.Add(new Kobold());
             while (!quit)
             {
                 foreach (var level in dungeon.levels)
@@ -41,5 +44,10 @@ static class Program
             Console.Write(ex.Message);
             //TODO: Dump the dungeon var to a recoverable file.
         }
+    }
+
+    private static void buildScreen()
+    {
+        Application.Run(new Screen());
     }
 }

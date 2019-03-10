@@ -32,9 +32,15 @@ public partial class Screen : Form
     {
         cellSize = ClientSize.Width / Config.screenWidth;
         image = new Bitmap(ClientSize.Width, ClientSize.Height);
-        font = new Font("DungeonFont", cellSize, FontStyle.Regular);
+        font = new Font(FontFamily.GenericMonospace, cellSize, FontStyle.Regular);
         buffer = Graphics.FromImage(image);
         screen = CreateGraphics();
+    }
+
+    protected override void OnResize(EventArgs e)
+    {
+        if (WindowState == FormWindowState.Maximized)
+            OnResizeEnd(e);
     }
 
     public void draw()
@@ -49,8 +55,10 @@ public partial class Screen : Form
         }
     }
 
-    public static void drawMessage()
+    public void drawMessage()
     {
+        var hudText = "Welcome To Dungeon.";
+        buffer.DrawString(hudText.trim(Config.screenWidth), font, brush, 0, 1 * cellSize);
     }
 
     void drawRoom()
@@ -61,28 +69,38 @@ public partial class Screen : Form
             {
                 var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
                 var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
-                var charToDraw = "☺";
+                Random rnd = new Random();
+                var charToDraw = "•";
 
-                //TODO: draw a rectangle at the position if there is a background color set;
                 if (actor != null)
                 {
-                    charToDraw = actor.sprite.ToString();
+                    if (actor.backgroundColor != Color.Empty)
+                    {
+                        brush.Color = actor.backgroundColor;
+                        buffer.FillRectangle(brush, x * cellSize,y * cellSize + Config.messageHeight * cellSize, cellSize, cellSize);
+                    }
                     brush.Color = actor.forgroundColor;
+                    charToDraw = actor.sprite.ToString();
                 }
                 else if (item != null)
                 {
-                    charToDraw = item.sprite.ToString();
+                    if (item.backgroundColor != Color.Empty)
+                    {
+                        brush.Color = item.backgroundColor;
+                        buffer.FillRectangle(brush, x * cellSize, y * cellSize + Config.messageHeight * cellSize, cellSize, cellSize);
+                    }
                     brush.Color = item.forgroundColor;
+                    charToDraw = item.sprite.ToString();
                 }
 
-                buffer.DrawString(charToDraw, font, brush, x * cellSize, y * cellSize);
+                buffer.DrawString(charToDraw, font, brush, x * cellSize, y * cellSize + Config.messageHeight * cellSize);
+                brush.Color = Color.White;
             }
         }
     }
 
     public void drawHud()
     {
-        var hudText = "Player HUD";
-        buffer.DrawString(hudText.trim(Config.screenWidth), font, brush, 0, Config.roomHeight);
+
     }
 }
