@@ -1,75 +1,85 @@
 using System;
+using System.Windows.Forms;
 class Hero : Actor
 {
     public int lightRadius { get; set; }
+    public KeyEventArgs input { get; set; }
     public Hero() : base()
     {
-        sprite = ' ';
+        input = null;
+        sprite = '@';
         lightRadius = 5;
     }
     public override Action takeTurn()
     {
-        while(Console.KeyAvailable)
-            Console.ReadKey(true);
-        var input = Console.ReadKey(true);
         Action action = new RetryAction();
 
-        if (input.Modifiers.HasFlag(ConsoleModifiers.Shift) && input.Key == ConsoleKey.Q)
+        while (input == null && !Program.quit)
+        {
+        }
+        if (Program.quit)
+        {
+            return action;
+        }
+
+        if (input.Shift && input.KeyCode == Keys.Q)
         {
             action = new QuitGameAction();
         }
-        else if (input.Key == ConsoleKey.Spacebar)
+        else if (input.KeyCode == Keys.Space)
         {
             action = new IdleAction();
         }
-        else if (input.Key == ConsoleKey.NumPad1 || input.Key == ConsoleKey.End)
+        else if (input.KeyCode == Keys.NumPad1 || input.KeyCode == Keys.End)
         {
             var targetPosition = new Position(this.position.x - 1, this.position.y + 1);
             //TODO: check for interposing things here.
             action = new MoveAction(this, targetPosition);
         }
-        else if (input.Key == ConsoleKey.NumPad2 || input.Key == ConsoleKey.DownArrow)
+        else if (input.KeyCode == Keys.NumPad2 || input.KeyCode == Keys.Down)
         {
             var targetPosition = new Position(this.position.x, this.position.y + 1);
             //TODO: check for interposing things here.
             action = new MoveAction(this, targetPosition);
         }
-        else if (input.Key == ConsoleKey.NumPad3 || input.Key == ConsoleKey.PageDown)
+        else if (input.KeyCode == Keys.NumPad3 || input.KeyCode == Keys.PageDown)
         {
             var targetPosition = new Position(this.position.x + 1, this.position.y + 1);
             //TODO: check for interposing things here.
             action = new MoveAction(this, targetPosition);
         }
-        else if (input.Key == ConsoleKey.NumPad4 || input.Key == ConsoleKey.LeftArrow)
+        else if (input.KeyCode == Keys.NumPad4 || input.KeyCode == Keys.Left)
         {
             var targetPosition = new Position(this.position.x - 1, this.position.y);
             //TODO: check for interposing things here.
             action = new MoveAction(this, targetPosition);
         }
-        else if (input.Key == ConsoleKey.NumPad6 || input.Key == ConsoleKey.RightArrow)
+        else if (input.KeyCode == Keys.NumPad6 || input.KeyCode == Keys.Right)
         {
             var targetPosition = new Position(this.position.x + 1, this.position.y);
             //TODO: check for interposing things here.
             action = new MoveAction(this, targetPosition);
         }
-        else if (input.Key == ConsoleKey.NumPad7 || input.Key == ConsoleKey.Home)
+        else if (input.KeyCode == Keys.NumPad7 || input.KeyCode == Keys.Home)
         {
             var targetPosition = new Position(this.position.x - 1, this.position.y - 1);
             //TODO: check for interposing things here.
             action = new MoveAction(this, targetPosition);
         }
-        else if (input.Key == ConsoleKey.NumPad8 || input.Key == ConsoleKey.UpArrow)
+        else if (input.KeyCode == Keys.NumPad8 || input.KeyCode == Keys.Up)
         {
             var targetPosition = new Position(this.position.x, this.position.y - 1);
             //TODO: check for interposing things here.
             action = new MoveAction(this, targetPosition);
         }
-        else if (input.Key == ConsoleKey.NumPad9 || input.Key == ConsoleKey.PageUp)
+        else if (input.KeyCode == Keys.NumPad9 || input.KeyCode == Keys.PageUp)
         {
             var targetPosition = new Position(this.position.x + 1, this.position.y - 1);
             //TODO: check for interposing things here.
             action = new MoveAction(this, targetPosition);
         }
+
+        input = null;
         return action;
     }
 }

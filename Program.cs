@@ -20,7 +20,7 @@ static class Program
             graphicsThread.IsBackground = true;
             graphicsThread.Start();
             
-            dungeon.levels[dungeon.currentLevel].actors.Add(new Kobold());
+            dungeon.levels[dungeon.currentLevel].actors.Add(hero);
             while (!quit)
             {
                 foreach (var level in dungeon.levels)

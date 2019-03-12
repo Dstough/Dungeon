@@ -47,11 +47,9 @@ public partial class Screen : Form
             }
             OnResizeEnd(e);
         }
-        else if (e.KeyCode == Keys.Escape)
-            Program.quit = true;
         else
         {
-            //TODO: pass input to the program.
+            Program.hero.input = e;
         }
     }
 
