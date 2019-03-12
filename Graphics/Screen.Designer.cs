@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 partial class Screen
 {
@@ -18,12 +19,13 @@ partial class Screen
     
     private void InitializeComponent()
     {
-        this.SuspendLayout();
-        this.Name = "Dungeon";
-        this.Text = "Dungeon";
-        this.ClientSize = new Size(800, 600);
-        this.BackColor = Color.Black;
-        this.Load += new System.EventHandler(onLoad);
-        this.ResumeLayout(false);
+        SuspendLayout();
+        Name = "Dungeon";
+        Text = "Dungeon";
+        ClientSize = new Size(800, 600);
+        BackColor = Color.Black;
+        Load += new EventHandler(onLoad);
+        KeyDown += new KeyEventHandler(onKeyPress);
+        ResumeLayout(false);
     }
 }
