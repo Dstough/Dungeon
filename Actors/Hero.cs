@@ -17,12 +17,8 @@ class Hero : Actor
         while (input == null && !Program.quit)
         {
         }
-        if (Program.quit)
-        {
-            return action;
-        }
 
-        if (input.Shift && input.KeyCode == Keys.Q)
+        if (Program.quit || (input.Shift && input.KeyCode == Keys.Q))
         {
             action = new QuitGameAction();
         }

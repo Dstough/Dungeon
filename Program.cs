@@ -19,19 +19,35 @@ static class Program
         {
             graphicsThread.IsBackground = true;
             graphicsThread.Start();
-            
+
             dungeon.levels[dungeon.currentLevel].actors.Add(hero);
+
             while (!quit)
             {
                 foreach (var level in dungeon.levels)
                 {
+                    if (quit)
+                    {
+                        break;
+                    }
                     foreach (var actor in level.actors)
                     {
+                        if (quit)
+                        {
+                            break;
+                        }
                         actor.initiative++;
                         if (actor.initiative >= actor.speed)
                         {
                             Action action;
-                            do action = actor.takeTurn();
+                            do
+                            {
+                                if (quit)
+                                {
+                                    break;
+                                }
+                                action = actor.takeTurn();
+                            }
                             while (action.perform() == ActionResult.retry);
                             actor.initiative -= action.speed;
                         }
@@ -42,7 +58,7 @@ static class Program
         catch (Exception ex)
         {
             Console.Write(ex.Message);
-            //TODO: Dump the dungeon var to a recoverable file.
+            //TODO: Try to save the game here.
         }
     }
 

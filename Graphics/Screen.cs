@@ -28,6 +28,11 @@ public partial class Screen : Form
         thread.Start();
     }
 
+    private void onFormClose(object sender, FormClosedEventArgs e)
+    {
+        Program.quit = true;
+    }
+
     private void onKeyPress(object sender, KeyEventArgs e)
     {
         if (e.Alt && e.KeyCode == Keys.Enter)

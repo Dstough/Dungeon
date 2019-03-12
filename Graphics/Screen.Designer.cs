@@ -26,6 +26,7 @@ partial class Screen
         BackColor = Color.Black;
         Load += new EventHandler(onLoad);
         KeyDown += new KeyEventHandler(onKeyPress);
+        FormClosed += new FormClosedEventHandler(onFormClose);
         ResumeLayout(false);
     }
 }
