@@ -39,7 +39,7 @@ static class Program
                         actor.initiative++;
                         if (actor.initiative >= actor.speed)
                         {
-                            Action action;
+                            Action action = new IdleAction();
                             do
                             {
                                 if (quit)

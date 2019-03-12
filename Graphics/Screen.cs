@@ -99,8 +99,7 @@ public partial class Screen : Form
             {
                 var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
                 var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
-                Random rnd = new Random();
-                var charToDraw = "·";
+                var charToDraw = "—";
 
                 if (actor != null)
                 {
