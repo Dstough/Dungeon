@@ -4,6 +4,6 @@ class QuitGameAction : Action
     {       
         //TODO: save game here.
         Program.quit = true;
-        return ActionResult.retry;
+        return ActionResult.failure;
     }
 }

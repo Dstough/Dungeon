@@ -26,32 +26,24 @@ static class Program
             {
                 foreach (var level in dungeon.levels)
                 {
-                    if (quit)
-                    {
-                        break;
-                    }
                     foreach (var actor in level.actors)
                     {
-                        if (quit)
-                        {
-                            break;
-                        }
-                        actor.initiative++;
-                        if (actor.initiative >= actor.speed)
+                        while (actor.initiative >= 12)
                         {
                             Action action = new IdleAction();
-                            do
+                            do 
                             {
-                                if (quit)
-                                {
-                                    break;
-                                }
+                                if (quit) break;
                                 action = actor.takeTurn();
                             }
-                            while (action.perform() == ActionResult.retry);
-                            actor.initiative -= action.speed;
+                            while (action.perform() == ActionResult.failure);
+                            if (quit) break;
+                            actor.initiative -= 12;
                         }
+                        if (quit) break;
+                        actor.initiative += actor.speed;
                     }
+                    if (quit) break;
                 }
             }
         }
