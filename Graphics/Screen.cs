@@ -60,9 +60,9 @@ public partial class Screen : Form
 
     protected override void OnResizeEnd(EventArgs e)
     {
-        cellSize = ClientSize.Width / (Config.screenWidth + Config.screenPadding);
+        cellSize = ClientSize.Width / Config.screenWidth;
         image = new Bitmap(ClientSize.Width, ClientSize.Height);
-        font = new Font(FontFamily.GenericMonospace, cellSize, FontStyle.Regular);
+        font = new Font("Lucida Console", cellSize, GraphicsUnit.Pixel);
         buffer = Graphics.FromImage(image);
         screen = CreateGraphics();
     }
@@ -99,14 +99,14 @@ public partial class Screen : Form
             {
                 var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
                 var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
-                var charToDraw = "—";
+                var charToDraw = "█";
 
                 if (actor != null)
                 {
                     if (actor.backgroundColor != Color.Empty)
                     {
                         brush.Color = actor.backgroundColor;
-                        buffer.FillRectangle(brush, x * cellSize + Config.screenPadding * cellSize, y * cellSize + Config.messageHeight * cellSize, cellSize, cellSize);
+                        buffer.FillRectangle(brush, x * cellSize, y * cellSize + Config.messageHeight * cellSize, cellSize, cellSize);
                     }
                     brush.Color = actor.forgroundColor;
                     charToDraw = actor.sprite.ToString();
@@ -116,16 +116,15 @@ public partial class Screen : Form
                     if (item.backgroundColor != Color.Empty)
                     {
                         brush.Color = item.backgroundColor;
-                        buffer.FillRectangle(brush, x * cellSize + Config.screenPadding * cellSize, y * cellSize + Config.messageHeight * cellSize, cellSize, cellSize);
+                        buffer.FillRectangle(brush, x * cellSize, y * cellSize + Config.messageHeight * cellSize, cellSize, cellSize);
                     }
                     brush.Color = item.forgroundColor;
                     charToDraw = item.sprite.ToString();
                 }
 
-                buffer.DrawString(charToDraw, font, brush, x * cellSize + Config.screenPadding * cellSize, y * cellSize + Config.messageHeight * cellSize);
+                buffer.DrawString(charToDraw, font, brush, x * cellSize, y * cellSize + Config.messageHeight * cellSize);
                 brush.Color = Color.White;
             }
-            buffer.DrawString(" ", font, brush, (Config.screenPadding + Config.screenWidth) * cellSize, y * cellSize);
         }
     }
 

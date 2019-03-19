@@ -33,17 +33,14 @@ static class Program
                             Action action = new IdleAction();
                             do 
                             {
-                                if (quit) break;
                                 action = actor.takeTurn();
+                                if (quit) return;
                             }
                             while (action.perform() == ActionResult.failure);
-                            if (quit) break;
                             actor.initiative -= 12;
                         }
-                        if (quit) break;
                         actor.initiative += actor.speed;
                     }
-                    if (quit) break;
                 }
             }
         }
