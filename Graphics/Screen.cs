@@ -62,7 +62,7 @@ public partial class Screen : Form
     {
         cellSize = ClientSize.Width / Config.screenWidth;
         image = new Bitmap(ClientSize.Width, ClientSize.Height);
-        font = new Font("Lucida Console", cellSize, GraphicsUnit.Pixel);
+        font = new Font("Lucida Console", cellSize + 12, GraphicsUnit.Pixel);
         buffer = Graphics.FromImage(image);
         screen = CreateGraphics();
     }
@@ -87,8 +87,8 @@ public partial class Screen : Form
 
     public void drawMessage()
     {
-        var messageText = "Welcome To Dungeon.";
-        buffer.DrawString(messageText.trim(Config.screenWidth), font, brush, 0 + Config.screenPadding * cellSize, 1 * cellSize);
+        var messageText = "font size:" + font.Size + ", cellSize:" + cellSize;
+        buffer.DrawString(messageText.trim(Config.screenWidth), font, brush, 0, 1 * cellSize);
     }
 
     void drawRoom()
@@ -99,14 +99,15 @@ public partial class Screen : Form
             {
                 var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
                 var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
-                var charToDraw = "█";
+                var charToDraw = "—";
+                brush.Color = Color.Gray;
 
                 if (actor != null)
                 {
                     if (actor.backgroundColor != Color.Empty)
                     {
                         brush.Color = actor.backgroundColor;
-                        buffer.FillRectangle(brush, x * cellSize, y * cellSize + Config.messageHeight * cellSize, cellSize, cellSize);
+                        buffer.FillRectangle(brush, (x * cellSize + 5), y * (cellSize + 12) + Config.messageHeight * cellSize, cellSize + 1, cellSize + 8);
                     }
                     brush.Color = actor.forgroundColor;
                     charToDraw = actor.sprite.ToString();
@@ -116,14 +117,14 @@ public partial class Screen : Form
                     if (item.backgroundColor != Color.Empty)
                     {
                         brush.Color = item.backgroundColor;
-                        buffer.FillRectangle(brush, x * cellSize, y * cellSize + Config.messageHeight * cellSize, cellSize, cellSize);
+                        buffer.FillRectangle(brush, (x * cellSize + 5), y * (cellSize + 12) + Config.messageHeight * cellSize, cellSize + 1, cellSize);
                     }
                     brush.Color = item.forgroundColor;
                     charToDraw = item.sprite.ToString();
                 }
 
-                buffer.DrawString(charToDraw, font, brush, x * cellSize, y * cellSize + Config.messageHeight * cellSize);
-                brush.Color = Color.White;
+                buffer.DrawString(charToDraw, font, brush, x * (cellSize), y * (cellSize + 12) + Config.messageHeight * cellSize);
+                brush.Color = Color.Gray;
             }
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using System.Drawing;
 class Hero : Actor
 {
     public int lightRadius { get; set; }
@@ -8,6 +9,7 @@ class Hero : Actor
     {
         input = null;
         sprite = '@';
+        backgroundColor = Color.Red;
         lightRadius = 5;
     }
     public override Action takeTurn()
