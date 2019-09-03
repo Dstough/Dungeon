@@ -23,8 +23,10 @@ public partial class Screen : Form
     {
         OnResizeEnd(e);
         brush = new SolidBrush(Color.Gray);
-        thread = new Thread(draw);
-        thread.IsBackground = true;
+        thread = new Thread(draw)
+        {
+            IsBackground = true
+        };
         thread.Start();
     }
 
@@ -94,7 +96,6 @@ public partial class Screen : Form
     void drawRoom()
     {
         for (var y = 0; y < Config.roomHeight; y++)
-        {
             for (var x = 0; x < Config.screenWidth; x++)
             {
                 var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
@@ -126,7 +127,6 @@ public partial class Screen : Form
                 buffer.DrawString(charToDraw, font, brush, x * (cellSize), y * (cellSize + 12) + Config.messageHeight * cellSize);
                 brush.Color = Color.Gray;
             }
-        }
     }
 
     public void drawHud()

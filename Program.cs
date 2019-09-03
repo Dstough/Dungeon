@@ -22,10 +22,9 @@ static class Program
 
             graphicsThread.IsBackground = true;
             graphicsThread.Start();
+
             while (!quit)
-            {
                 foreach (var level in dungeon.levels)
-                {
                     foreach (var actor in level.actors)
                     {
                         while (actor.initiative >= 12)
@@ -34,15 +33,15 @@ static class Program
                             do
                             {
                                 action = actor.takeTurn();
-                                if (quit) return;
+                                if (quit)
+                                    return;
                             }
                             while (action.perform() == ActionResult.failure);
                             actor.initiative -= 12;
                         }
                         actor.initiative += actor.speed;
                     }
-                }
-            }
+
         }
         catch (Exception ex)
         {

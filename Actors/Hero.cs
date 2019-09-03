@@ -9,7 +9,6 @@ class Hero : Actor
     {
         input = null;
         sprite = '@';
-        backgroundColor = Color.Red;
         lightRadius = 5;
     }
     public override Action takeTurn()
@@ -21,13 +20,9 @@ class Hero : Actor
         }
 
         if (Program.quit || (input.Shift && input.KeyCode == Keys.Q))
-        {
             action = new QuitGameAction();
-        }
         else if (input.KeyCode == Keys.Space)
-        {
             action = new IdleAction();
-        }
         else if (input.KeyCode == Keys.NumPad1 || input.KeyCode == Keys.End)
         {
             var targetPosition = new Position(this.position.x - 1, this.position.y + 1);
