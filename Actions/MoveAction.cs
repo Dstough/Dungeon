@@ -12,7 +12,7 @@ class MoveAction : Action
     }
     public override ActionResult perform()
     {
-        if (self.ethereal || Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(o => o.position.x == targetLocation.x && o.position.y == targetLocation.y && o.name == "Wall").Count() == 0)
+        if (self.ethereal || Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(o => o.position.x == targetLocation.x && o.position.y == targetLocation.y && o.isSolid).Count() == 0)
             self.position = new Position(targetLocation.x, targetLocation.y);
         else
             ;
