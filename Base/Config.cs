@@ -3,14 +3,13 @@ class Config
 {
     #region system
 
-    public static int screenWidth { get; } = 80;
-    public static int roomHeight { get; } = 20;
-    public static int messageHeight {get;} = 2;
-    public static int hudHeight {get;} = 3;
-    public static int defaultSpeed { get; } = 10;
-    public static bool defaultRedrawScreen { get; } = false;
-    public static int defaultCreatureMovementSpeed { get; } = 5;
-
+    public const int screenWidth = 80;
+    public const int screenPadding = 1;
+    public const int roomHeight = 20;
+    public const int messageHeight  = 3;
+    public const int hudHeight = 3;
+    public const int defaultSpeed  = 10;
+    public const int defaultCreatureMovementSpeed = 5;
 
     #endregion
 

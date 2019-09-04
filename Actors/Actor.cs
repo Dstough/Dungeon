@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 class Actor : Entity
 {
+    public bool ethereal { get; set; }
     public int initiative { get; set; }
     public int speed { get; set; }
     public int movementSpeed { get; set; }
@@ -12,6 +13,7 @@ class Actor : Entity
         speed = Config.defaultSpeed;
         movementSpeed = Config.defaultCreatureMovementSpeed;
         initiative = 0;
+        ethereal = false;
     }
 
     public virtual Action takeTurn()

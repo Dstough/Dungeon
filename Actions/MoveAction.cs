@@ -1,4 +1,4 @@
-using System;
+using System.Linq;
 class MoveAction : Action
 {
     Position targetLocation { get; set; }
@@ -9,11 +9,13 @@ class MoveAction : Action
         targetLocation = _targetLocation;
         self = _self;
         speed = _self.movementSpeed;
-        redrawScreen = true;
     }
     public override ActionResult perform()
     {
-        self.position = new Position(targetLocation.x, targetLocation.y);
+        if (self.ethereal || Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(o => o.position.x == targetLocation.x && o.position.y == targetLocation.y && o.name == "Wall").Count() == 0)
+            self.position = new Position(targetLocation.x, targetLocation.y);
+        else
+            ;
         return ActionResult.success;
     }
 }

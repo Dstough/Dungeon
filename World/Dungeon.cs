@@ -8,8 +8,10 @@ class Dungeon
     public Dungeon()
     {
         currentLevel = 0;
-        levels = new List<Floor>();
-        levels.Add(new Floor());
+        levels = new List<Floor>
+        {
+            new Floor()
+        };
         name = "The Dungeon";
         description = "A long forgotton ruin lost to time.";
     }

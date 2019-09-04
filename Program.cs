@@ -1,50 +1,57 @@
 ﻿using System;
-using System.Text;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Windows.Forms;
 
-class Program
+static class Program
 {
+    static Thread graphicsThread = new Thread(buildScreen);
     public static bool quit = false;
     public static List<string> history = new List<string>();
     public static Dungeon dungeon = new Dungeon();
     public static Hero hero = new Hero();
 
-    static void Main(string[] args)
+    [STAThread]
+    static void Main()
     {
         try
         {
-            //TODO: Load configuration file.
-            //TODO: Generate first level.
+            LevelBuilder.drawBorder();
             dungeon.levels[dungeon.currentLevel].actors.Add(hero);
 
-            Screen.drawScreen();
+            graphicsThread.IsBackground = true;
+            graphicsThread.Start();
 
             while (!quit)
-            {
                 foreach (var level in dungeon.levels)
-                {
                     foreach (var actor in level.actors)
                     {
-                        actor.initiative++;
-                        if (actor.initiative >= actor.speed)
+                        while (actor.initiative >= 12)
                         {
                             Action action;
-                            do action = actor.takeTurn();
-                            while (action.perform() == ActionResult.retry);
-                            actor.initiative -= action.speed;
+                            do
+                            {
+                                action = actor.takeTurn();
+                                if (quit)
+                                    return;
+                            }
+                            while (action.perform() == ActionResult.failure);
+                            actor.initiative -= 12;
                         }
+                        actor.initiative += actor.speed;
                     }
-                }
-                Screen.drawScreen();
-            }
+
         }
         catch (Exception ex)
         {
             Console.Write(ex.Message);
-            //TODO: Dump the dungeon var to a recoverable file.
+            //TODO: Try to save the game here.
         }
-        Console.Write("\n Press any key to exit...");
-        Console.ReadKey();
+    }
+
+    private static void buildScreen()
+    {
+        Application.Run(new Screen());
     }
 }

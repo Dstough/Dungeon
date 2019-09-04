@@ -10,7 +10,7 @@ class Entity
     public Entity()
     {
         position = new Position(40, 10);
-        forgroundColor = Color.Empty;
+        forgroundColor = Color.White;
         backgroundColor = Color.Empty;
         sprite = ' ';
         name = "";
