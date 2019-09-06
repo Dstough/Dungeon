@@ -64,7 +64,7 @@ public partial class Screen : Form
     {
         cellSize = ClientSize.Width / Config.screenWidth;
         image = new Bitmap(ClientSize.Width, ClientSize.Height);
-        font = new Font("Lucida Console", cellSize + 12, GraphicsUnit.Pixel);
+        font = new Font("Courier New", cellSize * 2, GraphicsUnit.Pixel);
         buffer = Graphics.FromImage(image);
         screen = CreateGraphics();
     }
@@ -90,7 +90,7 @@ public partial class Screen : Form
     public void drawMessage()
     {
         var messageText = "font size:" + font.Size + ", cellSize:" + cellSize;
-        buffer.DrawString(messageText.trim(Config.screenWidth), font, brush, 0, 1 * cellSize);
+        buffer.DrawString(messageText.trim(Config.screenWidth), font, brush, 0, cellSize);
     }
 
     void drawRoom()
@@ -108,7 +108,7 @@ public partial class Screen : Form
                     if (actor.backgroundColor != Color.Empty)
                     {
                         brush.Color = actor.backgroundColor;
-                        buffer.FillRectangle(brush, (x * cellSize + 5), y * (cellSize + 12) + Config.messageHeight * cellSize, cellSize + 1, cellSize + 8);
+                        buffer.DrawString("█", font, brush, x * cellSize, y * (cellSize + cellSize / 2) + Config.messageHeight * cellSize);
                     }
                     brush.Color = actor.forgroundColor;
                     charToDraw = actor.sprite.ToString();
@@ -118,13 +118,13 @@ public partial class Screen : Form
                     if (item.backgroundColor != Color.Empty)
                     {
                         brush.Color = item.backgroundColor;
-                        buffer.FillRectangle(brush, (x * cellSize + 5), y * (cellSize + 12) + Config.messageHeight * cellSize, cellSize + 1, cellSize);
+                        buffer.DrawString("█", font, brush, x * cellSize, y * (cellSize + cellSize / 2) + Config.messageHeight * cellSize);
                     }
                     brush.Color = item.forgroundColor;
                     charToDraw = item.sprite.ToString();
                 }
 
-                buffer.DrawString(charToDraw, font, brush, x * (cellSize), y * (cellSize + 12) + Config.messageHeight * cellSize);
+                buffer.DrawString(charToDraw, font, brush, x * cellSize, y * (cellSize + cellSize / 2 ) + Config.messageHeight * cellSize);
                 brush.Color = Color.Gray;
             }
     }

@@ -11,6 +11,7 @@ static class Program
     public static List<string> history = new List<string>();
     public static Dungeon dungeon = new Dungeon();
     public static Hero hero = new Hero();
+    
 
     [STAThread]
     static void Main()
@@ -19,7 +20,7 @@ static class Program
         {
             LevelBuilder.drawBorder();
             dungeon.levels[dungeon.currentLevel].actors.Add(hero);
-
+            dungeon.levels[dungeon.currentLevel].actors.Add(new Kobold());
             graphicsThread.IsBackground = true;
             graphicsThread.Start();
 
