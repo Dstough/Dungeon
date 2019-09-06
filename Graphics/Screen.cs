@@ -89,7 +89,7 @@ public partial class Screen : Form
 
     public void drawMessage()
     {
-        var messageText = "font size:" + font.Size + ", cellSize:" + cellSize;
+        var messageText = "X:" + Program.hero.position.x + ", Y:" + Program.hero.position.y;
         buffer.DrawString(messageText.trim(Config.screenWidth), font, brush, 0, cellSize);
     }
 
@@ -98,6 +98,9 @@ public partial class Screen : Form
         for (var y = 0; y < Config.roomHeight; y++)
             for (var x = 0; x < Config.screenWidth; x++)
             {
+                if (Program.hero.position.DistanceTo(new Position(x, y)) > 15.5)
+                    continue;
+
                 var item = Program.dungeon.levels[Program.dungeon.currentLevel].objects.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
                 var actor = Program.dungeon.levels[Program.dungeon.currentLevel].actors.Where(obj => obj.position.x == x && obj.position.y == y).FirstOrDefault();
                 var charToDraw = "·";
@@ -124,7 +127,7 @@ public partial class Screen : Form
                     charToDraw = item.sprite.ToString();
                 }
 
-                buffer.DrawString(charToDraw, font, brush, x * cellSize, y * (cellSize + cellSize / 2 ) + Config.messageHeight * cellSize);
+                buffer.DrawString(charToDraw, font, brush, x * cellSize, y * (cellSize + cellSize / 2) + Config.messageHeight * cellSize);
                 brush.Color = Color.Gray;
             }
     }
