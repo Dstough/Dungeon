@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -11,7 +10,7 @@ static class Program
     public static List<string> history = new List<string>();
     public static Dungeon dungeon = new Dungeon();
     public static Hero hero = new Hero();
-    
+    public static TileSet tileSet = new TileSet("Runeset_24x24.png");
 
     [STAThread]
     static void Main()
@@ -19,8 +18,7 @@ static class Program
         try
         {
             LevelBuilder.drawBorder();
-            dungeon.levels[dungeon.currentLevel].actors.Add(hero);
-            dungeon.levels[dungeon.currentLevel].actors.Add(new Kobold());
+
             graphicsThread.IsBackground = true;
             graphicsThread.Start();
 

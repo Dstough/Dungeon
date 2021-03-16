@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -80,11 +81,49 @@ public partial class Screen : Form
         while (!Program.quit)
         {
             buffer.Clear(Color.Black);
-            drawMessage();
-            drawRoom();
-            drawHud();
+            //drawMessage();
+            //drawRoom();
+            //drawHud();
+
+            for (int i = 0, x = 0, y = 0; i < Program.tileSet.Glyphs.Length; i++)
+            {
+                if (i != 0 && i % 16 == 0)
+                {
+                    x = 0;
+                    y += cellSize;
+                }
+                buffer.DrawImage(Resize(Program.tileSet.Glyphs[i],cellSize,cellSize), x, y);
+                x += cellSize;
+            }
+
             screen.DrawImage(image, 0, 0);
         }
+    }
+
+    public Image Resize(Image image, int newWidth, int maxHeight, bool onlyResizeIfWider = true)
+    {
+        if (onlyResizeIfWider && image.Width <= newWidth) newWidth = image.Width;
+
+        var newHeight = image.Height * newWidth / image.Width;
+        if (newHeight > maxHeight)
+        {
+            // Resize with height instead  
+            newWidth = image.Width * maxHeight / image.Height;
+            newHeight = maxHeight;
+        }
+
+        var res = new Bitmap(newWidth, newHeight);
+
+        using (var graphic = Graphics.FromImage(res))
+        {
+            graphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            graphic.SmoothingMode = SmoothingMode.HighQuality;
+            graphic.PixelOffsetMode = PixelOffsetMode.HighQuality;
+            graphic.CompositingQuality = CompositingQuality.HighQuality;
+            graphic.DrawImage(image, 0, 0, newWidth, newHeight);
+        }
+
+        return res;
     }
 
     public void drawMessage()

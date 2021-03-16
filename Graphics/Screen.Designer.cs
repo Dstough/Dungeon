@@ -21,7 +21,8 @@ partial class Screen
         SuspendLayout();
         Name = "Dungeon";
         Text = "Dungeon";
-        ClientSize = new Size(810, 600);
+        Icon = new Icon("app.ico");
+        ClientSize = new Size(800, 600);
         BackColor = Color.Black;
         Load += new EventHandler(onLoad);
         KeyDown += new KeyEventHandler(onKeyPress);
