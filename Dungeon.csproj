@@ -1,24 +1,31 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UseWindowsForms>true</UseWindowsForms>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
     <GenerateFullPaths>True</GenerateFullPaths>
+    <StartupObject>Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <None Update="app.ico">
+    <Compile Remove="Graphics\Screen.Designer.cs" />
+    <Compile Remove="Graphics\Screen.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Graphics\Screen.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="Graphics\Screen.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
+    <PackageReference Include="SFML.Net" Version="2.5.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Graphics\app.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Gold_plated_16x16_v2.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Phoebus_16x16.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Runeset_24x24.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Tims_16x16.png">
+    <None Update="Graphics\Runeset_24x24.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

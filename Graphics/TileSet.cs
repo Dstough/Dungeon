@@ -1,24 +1,19 @@
-﻿using System.Drawing;
-using System;
-using System.IO;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 public class TileSet
 {
-    public string Name { get; }
     public int Height { get; }
     public int Width { get; }
-    public Bitmap Source { get; }
-    public Image[] Glyphs { get; }
+    public Texture2D Source { get; }
+    public Rectangle[] Glyphs { get; }
 
-    public TileSet(string fileName)
+    public TileSet(Texture2D texture)
     {
-        var data = Path.GetFileNameWithoutExtension(fileName).Split("_");
-
-        Name = data[0];
-        Source = new Bitmap(fileName);
-        Height = Source.Size.Height / 16;
-        Width = Source.Size.Width / 16;
-        Glyphs = new Image[16 * 16];
+        Source = texture;
+        Height = texture.Height / 16;
+        Width = texture.Width / 16;
+        Glyphs = new Rectangle[16 * 16];
 
         for (int i = 0, x = 0, y = 0; i < 16 * 16; i++)
         {
@@ -28,7 +23,7 @@ public class TileSet
                 y += Height;
             }
 
-            Glyphs[i] = Source.Clone(new Rectangle(x, y, Height, Width), Source.PixelFormat);
+            Glyphs[i] = new Rectangle(x, y, Height, Width);
 
             x += Width;
         }

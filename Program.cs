@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Windows.Forms;
+using System.Windows;
+using Dungeon.Graphics;
 
 static class Program
 {
+    public static Application WinApp { get; private set; }
+    public static Window MainWindow { get; private set; }
+
     static Thread graphicsThread = new Thread(buildScreen);
     public static bool quit = false;
     public static List<string> history = new List<string>();
-    public static Dungeon dungeon = new Dungeon();
+    public static Labyrinth dungeon = new Labyrinth();
     public static Hero hero = new Hero();
-    public static TileSet tileSet = new TileSet("Runeset_24x24.png");
 
     [STAThread]
     static void Main()
@@ -49,8 +52,10 @@ static class Program
         }
     }
 
+    [STAThread]
     private static void buildScreen()
     {
-        Application.Run(new Screen());
+        using(var screen = new Screen())
+            screen.Run();
     }
 }
