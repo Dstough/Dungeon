@@ -1,5 +1,10 @@
-abstract class Action
+using Dungeon.Base;
+
+namespace Dungeon.Actions
 {
-    public int speed { get; set; } = Config.defaultSpeed;
-    abstract public ActionResult perform();
+    abstract class Action
+    {
+        public int Speed { get; set; } = Config.DefaultSpeed;
+        abstract public ActionResult Perform();
+    }
 }

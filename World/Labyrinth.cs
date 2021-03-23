@@ -1,18 +1,19 @@
 using System.Collections.Generic;
-class Labyrinth
+
+namespace Dungeon.World
 {
-    public string name { get; set; }
-    public string description { get; set; }
-    public List<Floor> levels { get; set; }
-    public int currentLevel { get; set; }
-    public Labyrinth()
+    class Labyrinth
     {
-        currentLevel = 0;
-        levels = new List<Floor>
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<Floor> Levels { get; set; }
+        public int CurrentLevel { get; set; }
+        public Labyrinth()
         {
-            new Floor()
-        };
-        name = "The Dungeon";
-        description = "A long forgotton ruin lost to time.";
+            CurrentLevel = 0;
+            Levels = new List<Floor> { new Floor() };
+            Name = "The Dungeon";
+            Description = "A long forgotton ruin lost to time.";
+        }
     }
 }

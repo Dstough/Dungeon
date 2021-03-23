@@ -1,39 +1,43 @@
 using System;
-public static class Extensions
+
+namespace Dungeon.Base
 {
-    public static string trim(this string input, int start = 0, int length = Config.screenWidth)
+    public static class Extensions
     {
-        if (input.Length > length)
-            input = input.Substring(0, length);
-
-        return input;
-    }
-
-    public static double DistanceTo(this Position startingPosition, Position targetPosition)
-    {
-        var distance = new Position(Math.Abs(targetPosition.x - startingPosition.x), Math.Abs(targetPosition.y - startingPosition.y));
-        var steps = 0.0;
-
-        while (distance.x > 0 || distance.y > 0)
+        public static string Trim(this string input, int start = 0, int length = Config.ScreenWidth)
         {
-            if (distance.x > 0 && distance.y > 0)
-            {
-                steps += 1.5;
-                distance.x -= 1;
-                distance.y -= 1;
-            }
-            else if (distance.x > 0)
-            {
-                distance.x -= 1;
-                steps += 1.0;
-            }
-            else if (distance.y > 0)
-            {
-                distance.y -= 1;
-                steps += 1.0;
-            }
+            if (input.Length > length)
+                input = input.Substring(0, length);
+
+            return input;
         }
 
-        return steps;
+        public static double DistanceTo(this Position startingPosition, Position targetPosition)
+        {
+            var distance = new Position(Math.Abs(targetPosition.X - startingPosition.X), Math.Abs(targetPosition.Y - startingPosition.Y));
+            var steps = 0.0;
+
+            while (distance.X > 0 || distance.Y > 0)
+            {
+                if (distance.X > 0 && distance.Y > 0)
+                {
+                    steps += 1.5;
+                    distance.X -= 1;
+                    distance.Y -= 1;
+                }
+                else if (distance.X > 0)
+                {
+                    distance.X -= 1;
+                    steps += 1.0;
+                }
+                else if (distance.Y > 0)
+                {
+                    distance.Y -= 1;
+                    steps += 1.0;
+                }
+            }
+
+            return steps;
+        }
     }
 }

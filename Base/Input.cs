@@ -1,4 +1,7 @@
-﻿public struct Input
+﻿namespace Dungeon.Base
 {
-    public bool Wait { get; set; }
+    public struct Input
+    {
+        public bool Wait { get; set; }
+    }
 }

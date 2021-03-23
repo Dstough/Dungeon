@@ -1,31 +1,34 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-public class TileSet
+namespace Dungeon.Graphics
 {
-    public int Height { get; }
-    public int Width { get; }
-    public Texture2D Source { get; }
-    public Rectangle[] Glyphs { get; }
-
-    public TileSet(Texture2D texture)
+    public class TileSet
     {
-        Source = texture;
-        Height = texture.Height / 16;
-        Width = texture.Width / 16;
-        Glyphs = new Rectangle[16 * 16];
+        public int Height { get; }
+        public int Width { get; }
+        public Texture2D Source { get; }
+        public Rectangle[] Glyphs { get; }
 
-        for (int i = 0, x = 0, y = 0; i < 16 * 16; i++)
+        public TileSet(Texture2D texture)
         {
-            if (i != 0 && i % 16 == 0)
+            Source = texture;
+            Height = texture.Height / 16;
+            Width = texture.Width / 16;
+            Glyphs = new Rectangle[16 * 16];
+
+            for (int i = 0, x = 0, y = 0; i < 16 * 16; i++)
             {
-                x = 0;
-                y += Height;
+                if (i != 0 && i % 16 == 0)
+                {
+                    x = 0;
+                    y += Height;
+                }
+
+                Glyphs[i] = new Rectangle(x, y, Height, Width);
+
+                x += Width;
             }
-
-            Glyphs[i] = new Rectangle(x, y, Height, Width);
-
-            x += Width;
         }
     }
 }

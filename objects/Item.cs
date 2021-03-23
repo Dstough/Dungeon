@@ -1,4 +1,9 @@
-abstract class Item : Entity
+using Dungeon.Base;
+
+namespace Dungeon.Objects
 {
-    public bool isSolid { get; set; } = false;
+    abstract class Item : Entity
+    {
+        public bool IsSolid { get; set; } = false;
+    }
 }

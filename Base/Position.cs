@@ -1,11 +1,14 @@
-public struct Position
+namespace Dungeon.Base
 {
-    public int x { get; set; }
-    public int y { get; set; }
-
-    public Position(int _x, int _y)
+    public struct Position
     {
-        x = _x;
-        y = _y;
+        public int X { get; set; }
+        public int Y { get; set; }
+
+        public Position(int _x, int _y)
+        {
+            X = _x;
+            Y = _y;
+        }
     }
 }

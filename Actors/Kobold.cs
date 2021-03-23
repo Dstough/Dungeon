@@ -1,9 +1,13 @@
 using System.Drawing;
-class Kobold : Actor
-{
-    public Kobold() : base()
+
+namespace Dungeon.Actors
+{ 
+    class Kobold : Actor
     {
-        sprite = 'k';
-        forgroundColor = Color.Yellow;
+        public Kobold() : base()
+        {
+            Sprite = 'k';
+            ForgroundColor = Color.Yellow;
+        }
     }
 }

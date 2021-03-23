@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
+using Dungeon.Actors;
+using Dungeon.Base;
 using Dungeon.Graphics;
+using Dungeon.World;
 
 static class Program
 {
     public static Application WinApp { get; private set; }
     public static Window MainWindow { get; private set; }
 
-    static Thread graphicsThread = new Thread(buildScreen);
+    static Thread graphicsThread = new Thread(BuildScreen);
     public static bool quit = false;
     public static List<string> history = new List<string>();
     public static Labyrinth dungeon = new Labyrinth();
@@ -20,28 +23,28 @@ static class Program
     {
         try
         {
-            LevelBuilder.drawBorder();
+            LevelBuilder.DrawBorder();
 
             graphicsThread.IsBackground = true;
             graphicsThread.Start();
 
             while (!quit)
-                foreach (var level in dungeon.levels)
-                    foreach (var actor in level.actors)
+                foreach (var level in dungeon.Levels)
+                    foreach (var actor in level.Actors)
                     {
-                        while (actor.initiative >= 12)
+                        while (actor.Initiative >= 12)
                         {
-                            Action action;
+                            Dungeon.Actions.Action action;
                             do
                             {
-                                action = actor.takeTurn();
+                                action = actor.TakeTurn();
                                 if (quit)
                                     return;
                             }
-                            while (action.perform() == ActionResult.failure);
-                            actor.initiative -= 12;
+                            while (action.Perform() == ActionResult.failure);
+                            actor.Initiative -= 12;
                         }
-                        actor.initiative += actor.speed;
+                        actor.Initiative += actor.Speed;
                     }
 
         }
@@ -53,9 +56,9 @@ static class Program
     }
 
     [STAThread]
-    private static void buildScreen()
+    private static void BuildScreen()
     {
-        using(var screen = new Screen())
+        using (var screen = new Screen())
             screen.Run();
     }
 }

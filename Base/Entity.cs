@@ -1,19 +1,24 @@
 using System.Drawing;
-class Entity
+
+namespace Dungeon.Base
 {
-    public Position position { get; set; }
-    public char sprite { get; set; }
-    public Color forgroundColor { get; set; }
-    public Color backgroundColor { get; set; }
-    public string name { get; set; }
-    public string description { get; set; }
-    public Entity()
+    class Entity
     {
-        position = new Position(40, 10);
-        forgroundColor = Color.White;
-        backgroundColor = Color.Empty;
-        sprite = ' ';
-        name = "";
-        description = "";
+        public Position Position { get; set; }
+        public char Sprite { get; set; }
+        public Color ForgroundColor { get; set; }
+        public Color BackgroundColor { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public Entity()
+        {
+            Position = new Position(40, 10);
+            ForgroundColor = Color.White;
+            BackgroundColor = Color.Empty;
+            Sprite = ' ';
+            Name = "";
+            Description = "";
+        }
     }
 }

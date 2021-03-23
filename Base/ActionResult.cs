@@ -1,5 +1,8 @@
-enum ActionResult
+namespace Dungeon.Base
 {
-    success,
-    failure
+    enum ActionResult
+    {
+        success,
+        failure
+    }
 }

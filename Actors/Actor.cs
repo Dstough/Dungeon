@@ -1,23 +1,30 @@
 using System.Collections.Generic;
-class Actor : Entity
+using Dungeon.Actions;
+using Dungeon.Base;
+using Dungeon.Objects;
+
+namespace Dungeon.Actors
 {
-    public bool ethereal { get; set; }
-    public int initiative { get; set; }
-    public int speed { get; set; }
-    public int movementSpeed { get; set; }
-    public List<Item> inventory { get; set; }
-
-    public Actor() : base()
+    class Actor : Entity
     {
-        inventory = new List<Item>();
-        speed = Config.defaultSpeed;
-        movementSpeed = Config.defaultCreatureMovementSpeed;
-        initiative = 0;
-        ethereal = false;
-    }
+        public bool Ethereal { get; set; }
+        public int Initiative { get; set; }
+        public int Speed { get; set; }
+        public int MovementSpeed { get; set; }
+        public List<Item> Inventory { get; set; }
 
-    public virtual Action takeTurn()
-    {
-        return new IdleAction();
+        public Actor() : base()
+        {
+            Inventory = new List<Item>();
+            Speed = Config.DefaultSpeed;
+            MovementSpeed = Config.DefaultCreatureMovementSpeed;
+            Initiative = 0;
+            Ethereal = false;
+        }
+
+        public virtual Action TakeTurn()
+        {
+            return new IdleAction();
+        }
     }
 }

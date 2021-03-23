@@ -1,20 +1,29 @@
+using Dungeon.Actors;
+using Dungeon.Base;
+using Dungeon.Objects;
 using System.Collections.Generic;
-class Floor
+
+namespace Dungeon.World
 {
-    public int level { get; set; }
-    public int height { get; set; }
-    public int width { get; set; }
-    public List<Item> objects { get; set; }
-    public List<Actor> actors { get; set; }
-    public Floor(int _level) : this()
+    class Floor
     {
-        level = _level;
-    }
-    public Floor()
-    {
-        height = Config.roomHeight;
-        width = Config.screenWidth;
-        objects = new List<Item>();
-        actors = new List<Actor>();
+        public int Level { get; set; }
+        public int Height { get; set; }
+        public int Width { get; set; }
+        public List<Item> Objects { get; set; }
+        public List<Actor> Actors { get; set; }
+        
+        public Floor(int _level) : this()
+        {
+            Level = _level;
+        }
+        
+        public Floor()
+        {
+            Height = Config.RoomHeight;
+            Width = Config.ScreenWidth;
+            Objects = new List<Item>();
+            Actors = new List<Actor>();
+        }
     }
 }

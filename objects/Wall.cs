@@ -1,11 +1,15 @@
 using System.Drawing;
-class Wall : Item
+
+namespace Dungeon.Objects
 {
-    public Wall()
+    class Wall : Item
     {
-        name = "Wall";
-        sprite = '#';
-        forgroundColor = Color.White;
-        isSolid = true;
+        public Wall()
+        {
+            Name = "Wall";
+            Sprite = '#';
+            ForgroundColor = Color.White;
+            IsSolid = true;
+        }
     }
 }

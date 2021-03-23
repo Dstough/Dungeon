@@ -1,7 +1,12 @@
-class RetryAction : Action
+using Dungeon.Base;
+
+namespace Dungeon.Actions
 {
-    public override ActionResult perform()
+    class RetryAction : Action
     {
-        return ActionResult.failure;
+        public override ActionResult Perform()
+        {
+            return ActionResult.failure;
+        }
     }
 }

@@ -36,8 +36,8 @@ namespace Dungeon.Graphics
             fileStream.Close();
             fileStream.Dispose();
 
-            gridWidth = Program.dungeon.levels[Program.dungeon.currentLevel].width;
-            gridHeight = Program.dungeon.levels[Program.dungeon.currentLevel].height;
+            gridWidth = Program.dungeon.Levels[Program.dungeon.CurrentLevel].Width;
+            gridHeight = Program.dungeon.Levels[Program.dungeon.CurrentLevel].Height;
             cellWidth = GraphicsDevice.Viewport.Bounds.Width / gridWidth;
             cellHeight = GraphicsDevice.Viewport.Bounds.Height / gridHeight;
 
@@ -46,8 +46,8 @@ namespace Dungeon.Graphics
 
         protected void Resize(object sender, EventArgs e)
         {
-            gridWidth = Program.dungeon.levels[Program.dungeon.currentLevel].width;
-            gridHeight = Program.dungeon.levels[Program.dungeon.currentLevel].height;
+            gridWidth = Program.dungeon.Levels[Program.dungeon.CurrentLevel].Width;
+            gridHeight = Program.dungeon.Levels[Program.dungeon.CurrentLevel].Height;
             cellWidth = GraphicsDevice.Viewport.Bounds.Width / gridWidth;
             cellHeight = GraphicsDevice.Viewport.Bounds.Height / gridHeight;
         }
@@ -91,7 +91,8 @@ namespace Dungeon.Graphics
                     y += cellHeight;
                 }
 
-                spriteBatch.Draw(tileSet.Source,
+                spriteBatch.Draw(
+                    tileSet.Source,
                     new Rectangle(x, y, cellWidth, cellHeight),
                     tileSet.Glyphs[i],
                     Color.White

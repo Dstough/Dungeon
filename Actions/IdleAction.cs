@@ -1,11 +1,16 @@
-class IdleAction : Action
+using Dungeon.Base;
+
+namespace Dungeon.Actions
 {
-    public IdleAction()
+    class IdleAction : Action
     {
-        speed = 1;
-    }
-    public override ActionResult perform()
-    {       
-        return ActionResult.success;
+        public IdleAction()
+        {
+            Speed = 1;
+        }
+        public override ActionResult Perform()
+        {
+            return ActionResult.success;
+        }
     }
 }

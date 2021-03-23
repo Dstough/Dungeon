@@ -1,9 +1,13 @@
 using System.Drawing;
-class Door : Item
+
+namespace Dungeon.Objects
 {
-    public Door()
+    internal class Door : Item
     {
-        sprite = '+';
-        forgroundColor = Color.DarkGray;
+        public Door()
+        {
+            Sprite = '+';
+            ForgroundColor = Color.DarkGray;
+        }
     }
 }

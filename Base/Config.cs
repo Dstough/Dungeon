@@ -1,19 +1,21 @@
-using System;
-class Config
+namespace Dungeon.Base
 {
-    #region system
+    class Config
+    {
+        #region system
 
-    public const int screenWidth = 40;
-    public const int screenPadding = 1;
-    public const int roomHeight = 40;
-    public const int messageHeight  = 3;
-    public const int hudHeight = 3;
-    public const int defaultSpeed  = 10;
-    public const int defaultCreatureMovementSpeed = 5;
+        public const int ScreenWidth = 40;
+        public const int ScreenPadding = 1;
+        public const int RoomHeight = 40;
+        public const int MessageHeight = 3;
+        public const int HudHeight = 3;
+        public const int DefaultSpeed = 10;
+        public const int DefaultCreatureMovementSpeed = 5;
 
-    #endregion
+        #endregion
 
-    #region user
+        #region user
 
-    #endregion
+        #endregion
+    }
 }
